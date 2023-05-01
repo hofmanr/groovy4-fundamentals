@@ -44,8 +44,26 @@ class exception_handling {
         } catch (Exception e) {
             println(e.getMessage())
             e.printStackTrace()
+        } finally {
+            println('Lets perform resource cleanup')
         }
         // The exception is recoverable
         println("After try/catch block")
+
+        try {
+            def cardLength = [16, 14, 15, 13]
+            check(cardLength)
+        } catch (InvalidCardLengthException ex) {
+            println(ex.getMessage())
+        }
+    }
+
+    static check(List list) {
+        for(card in list) {
+            if (card < 14) {
+                throw new InvalidCardLengthException('Card contains fewer than 14 digits')
+            }
+            println(card)
+        }
     }
 }
